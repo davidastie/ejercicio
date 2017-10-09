@@ -71,9 +71,8 @@ session.userData.lugar = lugar;
 
 session.send(`Hay buenos lugares para practicar BMX por ${lugar}`);
 
-session.userData.lugar = results.response;
-
 session.beginDialog('/deporte');
+
 
 }
 
@@ -89,7 +88,6 @@ builder.Prompts.text(session, '¿Te interesa la marca Fiend? es muy buena y gama
 
 function (session, results) {
 
-let deporte = results.response;
 
 session.send(`En ${session.userData.lugar} tenemos distribuidores de diferentes marcas`);
 
@@ -118,13 +116,15 @@ session.beginDialog('/lugares');
 bot.dialog('/lugares', [
 
 function (session) {
-builder.Prompts.text(session, `Debes enviarnos tus datos personales para enviarlo a ${session.userData.lugar}, demora de 1 a 2 dias`);
+    session.send(`Debes enviarnos tus datos personales para enviarlo a ${session.userData.lugar}`);
+    builder.Prompts.text(session, 'Demora de 1 a 2 dias');
 
+    
 },
 
 function (session, results) {
 
-let lugares = results.response;
+//let lugares = results.response;
 
 session.beginDialog('/producto2');
 
@@ -132,7 +132,7 @@ session.beginDialog('/producto2');
 
 ]);
 
-bot.dialog('producto2', [
+bot.dialog('/producto2', [
 
 function (session) {
 session.send('Ah que bueno, espero lo disfrutes mucho');
